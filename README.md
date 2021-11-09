@@ -6,3 +6,6 @@ all the different combinations of numbers and creates the answer sheet.
 
 There are also some extra methonds such as an even check, a min/max, getGCD, and findGCD
 that gets the GCD between 2 fractions.
+
+Methods in here are a mix between static and non-static. This was just for me to practice
+between the 2.
