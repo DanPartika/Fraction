@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.swing.undo.UndoManager;
-
 public class Frac {
 
     int numerator;
@@ -9,9 +7,9 @@ public class Frac {
     /**
     * Constructor, base case
     */
-    public Frac () {
+    public Frac () { //base case constructor 
         numerator = 1;
-        denominator = 0;
+        denominator = 1;
     }
 
     /*
@@ -21,8 +19,8 @@ public class Frac {
         if (denr == 0) {
             throw new IllegalArgumentException("Error: Denominator cannot equal 0.");
         }
-	    numerator = numr;
-	    denominator = denr;
+	numerator = numr;
+	denominator = denr;
         simplify();
     }
 
@@ -41,7 +39,7 @@ public class Frac {
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
-
+	//checks if the parameter is even
     public static boolean isEven(int num) {
         if (num % 2 == 0) {
             return true;
@@ -49,7 +47,7 @@ public class Frac {
             return false;
         }
     }
-
+	//returns the max of the 2 denominators
     public static Frac max(Frac frac1, Frac frac2) {
         if (frac1.getDenominator() > frac2.getDenominator()) {
             return frac1;
@@ -57,7 +55,7 @@ public class Frac {
             return frac2;
         }
     }
-
+	//returns the min of the 2 denominators
     public static Frac min(Frac frac1, Frac frac2) {
         if (frac1.getDenominator() > frac2.getDenominator()) {
             return frac2;
@@ -65,14 +63,14 @@ public class Frac {
             return frac1;
         }
     }
-
+	//gets the GCD 
     public int getGCD(int numerator1, int denominator1){
         if (numerator1 % denominator1 == 0) {
             return denominator1;
         }
         return getGCD(denominator1, numerator1 % denominator1);
     }
-
+	
     public static int findGCD(Frac frac1, Frac frac2) { //finds the gcd between 2 fractions
         if (frac1.getDenominator() == 1 || frac2.getDenominator() == 1) {     // check if either number is a whole number
             if (frac2.getDenominator() == 1) {                           //if it is we already have the gcd
@@ -92,14 +90,14 @@ public class Frac {
             }
         }
     }
-
+	//Simplifies 1 fraction
     void simplify() {
         int gcd = getGCD(numerator, denominator);
         numerator /= gcd;
         denominator /= gcd;
     }
 
-
+	//adds 2 fractions using a static method
     public static Frac Add(Frac frac1, Frac frac2) {
         if (frac1.denominator == frac2.denominator) {
             return new Frac(frac1.numerator + frac2.numerator, frac1.denominator);
@@ -110,19 +108,19 @@ public class Frac {
         }
         
     }
-
+	//Subtracts 2 fraction using a non-static method
     public Frac Subtract(Frac frac2) {
         int numer = (numerator * frac2.getDenominator()) - (denominator * frac2.getNumerator());
         int denom = denominator * frac2.getDenominator();
         return new Frac(numer, denom);
     }
-
+	//Multiplies 2 fractions using a static method
     public static Frac Multiply(Frac frac1, Frac frac2) {
         int numer = frac1.getNumerator() * frac2.getNumerator();
         int denom = frac1.getDenominator() * frac2.getDenominator();
         return new Frac(numer, denom);
     }
-
+	//Divides 2 fraction using a non-static method
     public Frac Divide(Frac frac2) {
         int numer = numerator * frac2.getDenominator();
         int denom = denominator * frac2.getNumerator();
